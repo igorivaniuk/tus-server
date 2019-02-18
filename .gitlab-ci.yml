@@ -1,0 +1,27 @@
+image: node:10
+
+stages:
+  - build
+  - test
+
+cache:
+  untracked: true
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  artifacts:
+    paths:
+      - dist/
+  script:
+    - node -v
+    - npm install
+    - npm run build -s
+
+test:
+  stage: test
+  script:
+    - npm install -s
+    - npm test -s

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Upload OPTIONS should return server config 1`] = `
+Object {
+  "access-control-allow-headers": "Authorization, Content-Type, Location, Tus-Extension, Tus-Max-Size, Tus-Resumable, Tus-Version, Upload-Defer-Length, Upload-Length, Upload-Metadata, Upload-Offset, X-HTTP-Method-Override, X-Requested-With",
+  "access-control-allow-methods": "POST, HEAD, PATCH, OPTIONS",
+  "access-control-expose-headers": "Authorization, Content-Type, Location, Tus-Extension, Tus-Max-Size, Tus-Resumable, Tus-Version, Upload-Defer-Length, Upload-Length, Upload-Metadata, Upload-Offset, X-HTTP-Method-Override, X-Requested-With",
+  "access-control-max-age": "86400",
+  "connection": "close",
+  "date": Any<String>,
+  "tus-extension": "creation,expiration",
+  "tus-max-size": "960344",
+  "tus-resumable": "1.0.0",
+  "tus-version": "1.0.0",
+}
+`;

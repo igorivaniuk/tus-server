@@ -1,14 +1,12 @@
-import DummyClass from "../src/tus-server"
+import { FileStore } from '../src/stores/file-store'
+import { TusServer } from '../src/tus-server'
 
-/**
- * Dummy test
- */
-describe("Dummy test", () => {
-  it("works if true is truthy", () => {
-    expect(true).toBeTruthy()
-  })
-
-  it("DummyClass is instantiable", () => {
-    expect(new DummyClass()).toBeInstanceOf(DummyClass)
+describe('TusServer', () => {
+  it('should config data store', () => {
+    let tus = new TusServer({
+      dataStore: new FileStore({
+        directory: '/tmp/tus'
+      })
+    })
   })
 })

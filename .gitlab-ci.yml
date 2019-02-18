@@ -3,25 +3,26 @@ image: node:10
 stages:
   - build
   - test
+  - release
 
-cache:
-  untracked: true
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
+
+before_script:
+  - npm install
 
 build:
   stage: build
-  artifacts:
-    paths:
-      - dist/
   script:
-    - node -v
-    - npm install
-    - npm run build -s
+    - npm run build
 
 test:
   stage: test
   script:
-    - npm install -s
-    - npm test -s
+    - npm test
+
+publish:
+  stage: release
+  only:
+  - master
+  when: manual
+  script:
+    - npm run semantic-release

@@ -7,6 +7,7 @@ import { HeadHandler } from './handlers/head.handler'
 import { OptionsHandler } from './handlers/options.handler'
 import { PatchHandler } from './handlers/patch.handler'
 import { PostHandler } from './handlers/post.handler'
+import { Hooks } from './hooks'
 import { DataStore } from './stores/data-store'
 import { RequestValidator } from './validators/request-validator'
 
@@ -34,7 +35,7 @@ export class TusServer<T extends http.IncomingMessage = http.IncomingMessage> {
   }
 
   get hooks() {
-    return this.config.dataStore.hooks
+    return this.config.dataStore.hooks as Hooks<T>
   }
 
   /**

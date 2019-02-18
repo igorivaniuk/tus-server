@@ -11,6 +11,9 @@ before_script:
 
 build:
   stage: build
+  artifacts:
+    paths:
+      - dist/
   script:
     - npm run build
 

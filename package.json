@@ -11,7 +11,7 @@
   "author": "Igor Ivaniuk <igorivaniuk@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/igorivaniuk/tus-server"
+    "url": "git+https://github.com/igorivaniuk/tus-server.git"
   },
   "license": "MIT",
   "engines": {

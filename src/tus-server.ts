@@ -67,22 +67,22 @@ export class TusServer<T extends http.IncomingMessage = http.IncomingMessage> {
     }
 
     // Validate all required headers to adhere to the tus protocol
-    const invalid_headers = []
-    for (const header_name in req.headers) {
+    const invalidHeaders = []
+    for (const headerName in req.headers) {
       if (req.method === 'OPTIONS') {
         break
       }
 
-      if (RequestValidator.isInvalidHeader(header_name, req.headers[header_name] as string)) {
-        log(`Invalid ${header_name} header: ${req.headers[header_name]}`)
-        invalid_headers.push(header_name)
+      if (RequestValidator.isInvalidHeader(headerName, req.headers[headerName] as string)) {
+        log(`Invalid ${headerName} header: ${req.headers[headerName]}`)
+        invalidHeaders.push(headerName)
       }
     }
 
-    if (invalid_headers.length > 0) {
+    if (invalidHeaders.length > 0) {
       // The request was not configured to the tus protocol
       res.writeHead(412, 'Precondition Failed')
-      return res.end(`Invalid ${invalid_headers.join(' ')}\n`)
+      return res.end(`Invalid ${invalidHeaders.join(' ')}\n`)
     }
 
     // Enable CORS
@@ -112,20 +112,20 @@ export class TusServer<T extends http.IncomingMessage = http.IncomingMessage> {
       let response = error.getResponse()
       if (typeof response === 'string') {
         res.writeHead(error.getStatus(), {
-          'Content-Type': 'text/plain'
+          'Content-Type': 'text/plain',
         })
         return res.end(response)
       }
       try {
         let body = JSON.stringify(response)
         res.writeHead(error.getStatus(), {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         })
         res.end(body)
       } catch (e) {
         log('stringify error', e)
         res.writeHead(500, {
-          'Content-Type': 'text/plain'
+          'Content-Type': 'text/plain',
         })
         res.end('Server error')
       }
@@ -157,6 +157,6 @@ export class TusServer<T extends http.IncomingMessage = http.IncomingMessage> {
 
   listen() {
     const server = http.createServer((req, res) => this.handle(req, res))
-    return server.listen.apply(server, arguments as any);
+    return server.listen.apply(server, arguments as any)
   }
 }

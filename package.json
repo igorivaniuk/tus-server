@@ -3,8 +3,8 @@
   "version": "0.0.0-development",
   "description": "",
   "keywords": [],
-  "main": "dist/lib/tus-server.js",
-  "typings": "dist/types/tus-server.d.ts",
+  "main": "dist/lib/index.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],

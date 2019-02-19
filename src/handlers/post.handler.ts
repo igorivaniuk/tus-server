@@ -5,7 +5,7 @@ import { TusException } from '../errors/tus.exception'
 import { BaseHandler, HandleResult } from './base.handler'
 
 export class PostHandler extends BaseHandler {
-  async handle(req: http.IncomingMessage): Promise<HandleResult> {
+  async handle(req: http.IncomingMessage & { originalUrl?: string }): Promise<HandleResult> {
     let headers = new Map<string, string>()
     const uploadLength = req.headers['upload-length']
 
@@ -19,7 +19,7 @@ export class PostHandler extends BaseHandler {
 
     let file = await this.store.create(req)
 
-    let { pathname } = parse(req.url!)
+    let { pathname } = parse(req.originalUrl || req.url!)
     if (!pathname) {
       throw new TusException('Bad url')
     }

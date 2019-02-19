@@ -8,8 +8,8 @@ import {TusServer, FileStore} from '@ivaniuk/tus-server';
 import * as express from 'express';
 
 const app = express();
-const server = new TusServer<e.Request>({
-    dataStore: new FileStore<e.Request>({
+const server = new TusServer<express.Request>({
+    dataStore: new FileStore<express.Request>({
         directory: '/tmp/tus',
         expiration: 3600, // 1 hour
     }),

@@ -60,6 +60,9 @@ export class RequestValidator {
     }
 
     const method = `_invalid${this.capitalizeHeader(headerName)}Header`
-    return this[method](headerValue)
+    if (this[method]) {
+      return this[method](headerValue)
+    }
+    return false
   }
 }

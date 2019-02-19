@@ -1,8 +1,15 @@
 {
   "name": "@ivaniuk/tus-server",
   "version": "0.0.0-development",
-  "description": "",
-  "keywords": [],
+  "description": "Node.js tus server for typescript",
+  "keywords": [
+    "tus",
+    "framework",
+    "resumable",
+    "upload",
+    "server",
+    "typescript"
+  ],
   "main": "dist/lib/index.js",
   "typings": "dist/types/index.d.ts",
   "files": [

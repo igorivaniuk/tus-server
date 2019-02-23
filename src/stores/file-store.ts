@@ -125,7 +125,10 @@ export class FileStore<T extends http.IncomingMessage = http.IncomingMessage> ex
         if (config && config.uploadLength === offset) {
           return this.afterComplete(config, req)
             .then(() => resolve(offset))
-            .catch(reject)
+            .catch(e => {
+              log('afterComplete Error', e)
+              reject(e)
+            })
         }
         resolve(offset)
       })

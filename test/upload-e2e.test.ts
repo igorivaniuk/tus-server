@@ -71,12 +71,18 @@ describe('Upload', () => {
     })
 
     it('tus version', async () => {
-      let res = await agent.head('/blablabla').set('Tus-Resumable', TUS_RESUMABLE).set('Tus-Version', '0.2.2')
+      let res = await agent
+        .head('/blablabla')
+        .set('Tus-Resumable', TUS_RESUMABLE)
+        .set('Tus-Version', '0.2.2')
       expect(res.status).toBe(412)
     })
 
     it('the Upload-Defer-Length value MUST be 1', async () => {
-      let res = await agent.head('/blablabla').set('Tus-Resumable', TUS_RESUMABLE).set('Upload-Defer-Length', '1234')
+      let res = await agent
+        .head('/blablabla')
+        .set('Tus-Resumable', TUS_RESUMABLE)
+        .set('Upload-Defer-Length', '1234')
       expect(res.status).toBe(412)
     })
 
@@ -146,7 +152,7 @@ describe('Upload', () => {
         .set('Upload-Length', String(TEST_FILE_SIZE))
         .set('Upload-Metadata', TEST_METADATA)
       expect(res.status).toBe(400)
-      expect(res.text).toBe('Bad request')
+      expect(res.text).toMatchSnapshot()
     })
 
     it('should response with hook error 1', async () => {
@@ -159,7 +165,7 @@ describe('Upload', () => {
         .set('Upload-Length', String(TEST_FILE_SIZE))
         .set('Upload-Metadata', TEST_METADATA)
       expect(res.status).toBe(401)
-      expect(res.text).toBe('Bad request')
+      expect(res.text).toMatchSnapshot()
     })
   })
 

@@ -1,6 +1,7 @@
 import debug from 'debug'
 import * as http from 'http'
 import * as uuid from 'uuid'
+import { HookException } from '../errors/hook.exception'
 import { InvalidLengthException } from '../errors/invalid-length.exception'
 import { Hooks, HookType } from '../hooks'
 import { TusFile } from '../models/tus-file'
@@ -42,15 +43,27 @@ export abstract class DataStore<T extends http.IncomingMessage = http.IncomingMe
   }
 
   async beforeCreate(req: T) {
-    await this.hooks.run(HookType.BeforeCreate, req)
+    try {
+      await this.hooks.run(HookType.BeforeCreate, req)
+    } catch (e) {
+      throw new HookException('beforeCreate', e)
+    }
   }
 
   async afterCreate(file: TusFile, req: T) {
-    await this.hooks.run(HookType.AfterCreate, file, req)
+    try {
+      await this.hooks.run(HookType.AfterCreate, file, req)
+    } catch (e) {
+      throw new HookException('afterCreate', e)
+    }
   }
 
   async afterComplete(file: TusFile, req: T) {
-    await this.hooks.run(HookType.AfterComplete, file, req)
+    try {
+      await this.hooks.run(HookType.AfterComplete, file, req)
+    } catch (e) {
+      throw new HookException('afterComplete', e)
+    }
   }
 
   async createFile(req: T) {
@@ -67,7 +80,7 @@ export abstract class DataStore<T extends http.IncomingMessage = http.IncomingMe
     return new TusFile(fileId, +uploadLength!, 0, uploadMetadata)
   }
 
-  abstract async init?(): Promise<void>;
+  abstract async init?(): Promise<void>
 
   /**
    * Called in POST requests. This method just creates a

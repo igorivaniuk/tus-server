@@ -14,3 +14,7 @@ Object {
   "tus-version": "1.0.0",
 }
 `;
+
+exports[`Upload POST should response with hook error 1`] = `"{\\"message\\":\\"Run hook error\\",\\"hook\\":\\"beforeCreate\\",\\"originalError\\":{\\"response\\":\\"Bad request\\",\\"status\\":400,\\"message\\":\\"Bad request\\"},\\"originalErrorName\\":\\"TusException\\"}"`;
+
+exports[`Upload POST should response with hook error 1 1`] = `"{\\"message\\":\\"Run hook error\\",\\"hook\\":\\"afterCreate\\",\\"originalError\\":{\\"response\\":\\"Bad request\\",\\"status\\":401,\\"message\\":\\"Bad request\\"},\\"originalErrorName\\":\\"TusException\\"}"`;

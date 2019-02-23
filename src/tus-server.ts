@@ -136,6 +136,7 @@ export class TusServer<T extends http.IncomingMessage = http.IncomingMessage> {
     log('[ERROR]', error)
 
     res.writeHead(500)
+    res.write(JSON.stringify({ message: error.message }))
     res.end()
   }
 
